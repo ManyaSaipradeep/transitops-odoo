@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 from typing import Optional
+from datetime import date
 
 class TripCreate(BaseModel):
     source: str
@@ -26,4 +27,25 @@ class TripOut(BaseModel):
     final_odometer: Optional[float]
     fuel_consumed: Optional[float]
     status: str
+    model_config = ConfigDict(from_attributes=True)
+
+class FuelLogCreate(BaseModel):
+    vehicle_id: int
+    liters: float
+    cost: float
+    date: date
+
+class FuelLogOut(FuelLogCreate):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
+
+class ExpenseCreate(BaseModel):
+    vehicle_id: int
+    trip_id: Optional[int]
+    type: str
+    amount: float
+    date: date
+
+class ExpenseOut(ExpenseCreate):
+    id: int
     model_config = ConfigDict(from_attributes=True)

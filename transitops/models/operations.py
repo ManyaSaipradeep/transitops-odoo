@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -18,3 +18,20 @@ class Trip(Base):
 
     vehicle = relationship("Vehicle")
     driver = relationship("Driver")
+
+class FuelLog(Base):
+    __tablename__ = "fuel_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    vehicle_id = Column(Integer, ForeignKey("vehicles.id"), nullable=False)
+    liters = Column(Float, nullable=False)
+    cost = Column(Float, nullable=False)
+    date = Column(Date, nullable=False)
+
+class Expense(Base):
+    __tablename__ = "expenses"
+    id = Column(Integer, primary_key=True, index=True)
+    vehicle_id = Column(Integer, ForeignKey("vehicles.id"), nullable=False)
+    trip_id = Column(Integer, ForeignKey("trips.id"), nullable=True)
+    type = Column(String, nullable=False)
+    amount = Column(Float, nullable=False)
+    date = Column(Date, nullable=False)
