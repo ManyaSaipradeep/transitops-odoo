@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .page-container {
+        width: 100%;
+        padding: 20px;
+        align-self: flex-start;
+    }
+    .settings-card {
+        background-color: var(--bg-card);
+        padding: 30px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        max-width: 500px;
+        margin-top: 20px;
+    }
+    .setting-item {
+        margin-bottom: 20px;
+    }
+    .setting-label {
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    .setting-value {
+        color: var(--text-primary);
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="page-container">
+    <h1>Settings</h1>
+    <div class="settings-card">
+        <h2>Profile Information</h2>
+        
+        <div class="setting-item">
+            <span class="setting-label">Email Address</span>
+            <span class="setting-value">{{ user.email }}</span>
+        </div>
+        
+        <div class="setting-item">
+            <span class="setting-label">Role</span>
+            <span class="setting-value">{{ user.role.name if user.role else 'No Role' }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

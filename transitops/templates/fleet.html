@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: var(--bg-card);
+    }
+    .data-table th, .data-table td {
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: left;
+    }
+    .data-table th {
+        color: var(--accent-orange);
+        border-bottom: 2px solid var(--border-color);
+    }
+    .page-container {
+        width: 100%;
+        padding: 20px;
+        align-self: flex-start;
+    }
+</style>
+
+<div class="page-container">
+    <h1>Fleet</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Registration Number</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Max Load (kg)</th>
+                <th>Odometer</th>
+                <th>Acq. Cost</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.registration_number }}</td>
+                <td>{{ vehicle.name_model }}</td>
+                <td>{{ vehicle.type }}</td>
+                <td>{{ vehicle.max_load_capacity }}</td>
+                <td>{{ vehicle.odometer }}</td>
+                <td>${{ vehicle.acquisition_cost }}</td>
+                <td>{{ vehicle.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

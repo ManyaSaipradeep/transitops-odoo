@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: var(--bg-card);
+    }
+    .data-table th, .data-table td {
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: left;
+    }
+    .data-table th {
+        color: var(--accent-orange);
+        border-bottom: 2px solid var(--border-color);
+    }
+    .page-container {
+        width: 100%;
+        padding: 20px;
+        align-self: flex-start;
+    }
+    .section-title {
+        margin-top: 40px;
+    }
+    .stat-highlight {
+        font-size: 24px;
+        color: var(--accent-orange);
+        font-weight: bold;
+    }
+</style>
+
+<div class="page-container">
+    <h1>Analytics</h1>
+    <p>Fleet Utilization: <span class="stat-highlight">{{ fleet_utilization_pct }}%</span></p>
+
+    <h2 class="section-title">Fuel Efficiency</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Registration Number</th>
+                <th>Distance per Fuel</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in fuel_efficiency %}
+            <tr>
+                <td>{{ item.vehicle_id }}</td>
+                <td>{{ item.registration_number }}</td>
+                <td>{{ item.distance_per_fuel }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="section-title">Vehicle ROI</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Registration Number</th>
+                <th>ROI</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in vehicle_roi %}
+            <tr>
+                <td>{{ item.vehicle_id }}</td>
+                <td>{{ item.registration_number }}</td>
+                <td>{{ item.roi }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

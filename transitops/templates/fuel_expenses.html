@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: var(--bg-card);
+    }
+    .data-table th, .data-table td {
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: left;
+    }
+    .data-table th {
+        color: var(--accent-orange);
+        border-bottom: 2px solid var(--border-color);
+    }
+    .page-container {
+        width: 100%;
+        padding: 20px;
+        align-self: flex-start;
+    }
+    .section-title {
+        margin-top: 40px;
+    }
+</style>
+
+<div class="page-container">
+    <h1>Fuel Logs</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Vehicle (ID)</th>
+                <th>Liters</th>
+                <th>Cost</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in fuel_logs %}
+            <tr>
+                <td>{{ log.vehicle_id }}</td>
+                <td>{{ log.liters }}</td>
+                <td>${{ log.cost }}</td>
+                <td>{{ log.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1 class="section-title">Expenses</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Vehicle (ID)</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.vehicle_id }}</td>
+                <td>{{ expense.type }}</td>
+                <td>${{ expense.amount }}</td>
+                <td>{{ expense.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
