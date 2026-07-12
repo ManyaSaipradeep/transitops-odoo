@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <h1>Sign In to TransitOps</h1>
+        <p>Fleet Management Dashboard</p>
+        
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            
+            <button type="submit" class="btn-primary">Sign In</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorDiv = document.getElementById('error-message');
+        
+        errorDiv.style.display = 'none';
+        
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                errorDiv.textContent = data.detail || 'Login failed';
+                errorDiv.style.display = 'block';
+            } else {
+                // Store token and redirect
+                localStorage.setItem('token', data.access_token);
+                alert('Successfully logged in! (Redirect to dashboard to be implemented)');
+            }
+        } catch (err) {
+            errorDiv.textContent = 'An error occurred during login.';
+            errorDiv.style.display = 'block';
+        }
+    });
+</script>
+{% endblock %}
