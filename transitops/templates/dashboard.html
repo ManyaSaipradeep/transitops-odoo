@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Fleet Management Dashboard</h1>
+    
+    <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Active Vehicles</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ active_vehicles }}</div>
+        </div>
+        
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Available Vehicles</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ available_vehicles }}</div>
+        </div>
+        
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Vehicles in Maintenance</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ vehicles_in_maintenance }}</div>
+        </div>
+        
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Active Trips</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ active_trips }}</div>
+        </div>
+        
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Pending Trips</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ pending_trips }}</div>
+        </div>
+        
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Drivers On Duty</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ drivers_on_duty }}</div>
+        </div>
+        
+        <div class="kpi-card" style="background: var(--surface-light, #1e1e24); padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent-primary, #ff6b35);">
+            <h3 style="margin-top: 0; color: #a0a0a0; font-size: 14px; text-transform: uppercase;">Fleet Utilization</h3>
+            <div class="kpi-value" style="font-size: 32px; font-weight: bold; color: #fff;">{{ fleet_utilization_pct }}%</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

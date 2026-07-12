@@ -48,9 +48,10 @@
                 errorDiv.textContent = data.detail || 'Login failed';
                 errorDiv.style.display = 'block';
             } else {
-                // Store token and redirect
+                // Store token in localStorage and cookie
                 localStorage.setItem('token', data.access_token);
-                alert('Successfully logged in! (Redirect to dashboard to be implemented)');
+                document.cookie = "token=" + data.access_token + "; path=/; max-age=86400";
+                window.location.href = '/dashboard';
             }
         } catch (err) {
             errorDiv.textContent = 'An error occurred during login.';

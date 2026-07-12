@@ -26,3 +26,21 @@ app.include_router(analytics.router, tags=["analytics"])
 @app.get("/")
 def read_root(request: Request):
     return templates.TemplateResponse(request=request, name="login.html")
+
+from fastapi.responses import RedirectResponse
+from fastapi import HTTPException, status, Depends
+from auth.dependencies import get_current_user, get_db, oauth2_scheme
+from routers.analytics import get_dashboard
+from sqlalchemy.orm import Session
+
+@app.get("/dashboard")
+async def dashboard_page(request: Request, db: Session = Depends(get_db)):
+    try:
+        credentials = await oauth2_scheme(request)
+        current_user = get_current_user(request=request, credentials=credentials, db=db)
+    except HTTPException:
+        return RedirectResponse(url="/", status_code=status.HTTP_302_FOUND)
+        
+    data = get_dashboard(db=db, current_user=current_user)
+    
+    return templates.TemplateResponse(request=request, name="dashboard.html", context=data)
